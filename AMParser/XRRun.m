@@ -61,8 +61,10 @@
         if ([process[@"Command"] isEqualToString:targetProcess]) {
             double cpuUsage = [process[@"CPUUsage"] doubleValue];
             double residentSize = [process[@"ResidentSize"] doubleValue] / 1024;
+            double virtualSize = [process[@"VirtualSize"] doubleValue] / 1024;
             [result appendFormat:@"CPU Usage: %.2f%% ", cpuUsage];
-            [result appendFormat:@"Resident Size: %.2f KiB ", residentSize];
+            [result appendFormat:@"Res Size: %.2f KiB ", residentSize];
+            [result appendFormat:@"Virt Size: %.2f KiB ", virtualSize];
             break;
         }
     }
