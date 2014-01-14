@@ -55,18 +55,19 @@ int main(int argc, const char *argv[])
             exit(1);
         }
         
+        NSString *workihngDic = [[NSBundle mainBundle] bundlePath];
+        
         NSString *inputTraceFile = [[NSString stringWithUTF8String:argv[1]] stringByExpandingTildeInPath];
         NSFileManager *fileManager = [NSFileManager defaultManager];
         
         NSString *resultZipFile = [NSString stringWithFormat:@"%@/instrument_data/%@/run_data/1.run.zip", inputTraceFile, templateUDID];
+        NSString *resultUnzippedFile = [NSString stringWithFormat:@"%@%@/instrument_data/%@/run_data/1.run",workihngDic, inputTraceFile, templateUDID];
         
         if (![fileManager fileExistsAtPath:resultZipFile])
         {
             NSLog(@"No Activity Manager trace result found!");
             exit(1);
         }
-
-        NSString *workihngDic = [[NSBundle mainBundle] bundlePath];
         
         // Unzip file
         NSTask *task;
@@ -92,13 +93,13 @@ int main(int argc, const char *argv[])
         NSString *string;
         string = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
         
-        NSRange startRange = [string rangeOfString:@"inflating: "];
-        NSString *unzipedFile = [[string substringFromIndex:(startRange.location + startRange.length)] stringByTrimmingTrailingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+//        NSRange startRange = [string rangeOfString:@"inflating: "];
+//        NSString *unzipedFile = [[string substringFromIndex:(startRange.location + startRange.length)] stringByTrimmingTrailingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         
         NSLog (@"\nunzip trace file:\n%@", string);
         
 		// Read the trace file into memory
-		NSURL *traceFile = [NSURL fileURLWithPath:[[NSString stringWithFormat:@"%@/%@", workihngDic, unzipedFile] stringByExpandingTildeInPath]];
+		NSURL *traceFile = [NSURL fileURLWithPath:[resultUnzippedFile stringByExpandingTildeInPath]];
 		NSData *traceData = [NSData dataWithContentsOfURL:traceFile];
 		
 		// Deserialize the data and dump its content
