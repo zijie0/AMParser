@@ -51,7 +51,7 @@ int main(int argc, const char *argv[])
 	{
         if (argc < 2)
         {
-            NSLog(@"Please specify the trace file!");
+            printf("Please specify the trace file!\n");
             exit(1);
         }
         
@@ -65,7 +65,7 @@ int main(int argc, const char *argv[])
         
         if (![fileManager fileExistsAtPath:resultZipFile])
         {
-            NSLog(@"No Activity Manager trace result found!");
+            printf("No Activity Manager trace result found!\n");
             exit(1);
         }
         
@@ -96,7 +96,7 @@ int main(int argc, const char *argv[])
 //        NSRange startRange = [string rangeOfString:@"inflating: "];
 //        NSString *unzipedFile = [[string substringFromIndex:(startRange.location + startRange.length)] stringByTrimmingTrailingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         
-        NSLog (@"\nunzip trace file:\n%@", string);
+        printf ("\nunzip trace file:\n%s\n", [string UTF8String]);
         
 		// Read the trace file into memory
 		NSURL *traceFile = [NSURL fileURLWithPath:[resultUnzippedFile stringByExpandingTildeInPath]];
@@ -104,7 +104,7 @@ int main(int argc, const char *argv[])
 		
 		// Deserialize the data and dump its content
 		XRActivityInstrumentRun *run = [NSUnarchiver unarchiveObjectWithData:traceData];
-		NSLog(@"\n%@", run);
+		printf("\n%s\n", [[run description] UTF8String]);
 	}
 	
     return 0;
