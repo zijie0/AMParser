@@ -55,10 +55,10 @@ int main(int argc, const char *argv[])
             exit(1);
         }
         
-        NSString *workihngDic = [[NSBundle mainBundle] bundlePath];
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        NSString *workihngDic = [fileManager currentDirectoryPath];
         
         NSString *inputTraceFile = [[NSString stringWithUTF8String:argv[1]] stringByExpandingTildeInPath];
-        NSFileManager *fileManager = [NSFileManager defaultManager];
         
         NSString *resultZipFile = [NSString stringWithFormat:@"%@/instrument_data/%@/run_data/1.run.zip", inputTraceFile, templateUDID];
         NSString *resultUnzippedFile = [NSString stringWithFormat:@"%@%@/instrument_data/%@/run_data/1.run",workihngDic, inputTraceFile, templateUDID];
