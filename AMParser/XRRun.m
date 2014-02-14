@@ -8,7 +8,7 @@
 
 #import "XRRun.h"
 
-#define targetProcess @"MicroStrategy"
+#define targetProcess @"DoorReader"
 
 @implementation XRRun
 

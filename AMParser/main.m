@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "XRRun.h"
 
-#define templateUDID @"E3BF39BB-8DCB-4D12-BDC7-DC7D678EB5F3"
+//#define templateUDID @"E3BF39BB-8DCB-4D12-BDC7-DC7D678EB5F3"
+#define templateUDID @"2DFBB7CF-2B32-41D6-9FA6-73CF813DFC24"
 
 @implementation NSString (TrimmingAdditions)
 
@@ -55,13 +56,12 @@ int main(int argc, const char *argv[])
             exit(1);
         }
         
-        NSString *workihngDic = [[NSBundle mainBundle] bundlePath];
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        NSString *workihngDic = [fileManager currentDirectoryPath];
         
         NSString *inputTraceFile = [[NSString stringWithUTF8String:argv[1]] stringByExpandingTildeInPath];
-        NSFileManager *fileManager = [NSFileManager defaultManager];
         
         NSString *resultZipFile = [NSString stringWithFormat:@"%@/instrument_data/%@/run_data/1.run.zip", inputTraceFile, templateUDID];
-        NSString *resultUnzippedFile = [NSString stringWithFormat:@"%@%@/instrument_data/%@/run_data/1.run",workihngDic, inputTraceFile, templateUDID];
         
         if (![fileManager fileExistsAtPath:resultZipFile])
         {
@@ -93,8 +93,10 @@ int main(int argc, const char *argv[])
         NSString *string;
         string = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
         
-//        NSRange startRange = [string rangeOfString:@"inflating: "];
-//        NSString *unzipedFile = [[string substringFromIndex:(startRange.location + startRange.length)] stringByTrimmingTrailingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        NSRange startRange = [string rangeOfString:@"inflating: "];
+        NSString *unzipedFile = [[string substringFromIndex:(startRange.location + startRange.length)] stringByTrimmingTrailingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        
+        NSString *resultUnzippedFile = [NSString stringWithFormat:@"%@/%@",workihngDic, unzipedFile];
         
         printf ("\nunzip trace file:\n%s\n", [string UTF8String]);
         
