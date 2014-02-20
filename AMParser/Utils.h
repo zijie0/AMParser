@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#define ZIP_FAILED @"Unzip Failed"
 
 @interface Utils : NSObject
-
++ (NSString *)unzipFile:(NSString *)filePath;
 @end
