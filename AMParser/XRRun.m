@@ -14,27 +14,25 @@
 
 - (id)initWithCoder:(NSCoder *)decoder
 {
-	if((self = [super init]))
-	{
+    if((self = [super init]))
+    {
         dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy/MM/dd HH:mm:ss:SSS"];
-		startTime = [[decoder decodeObject] doubleValue];
-		endTime   = [[decoder decodeObject] doubleValue];
-		runNumber = [[decoder decodeObject] unsignedIntegerValue];
-		
-        // retain?
-		trackSegments = [decoder decodeObject];
-		
-		// Totally not sure about these
-		envVals = [[decoder decodeObject] boolValue];
-		execname = [[decoder decodeObject] boolValue];
-		terminateTaskAtStop = [[decoder decodeObject] boolValue];
+        startTime = [[decoder decodeObject] doubleValue];
+        endTime   = [[decoder decodeObject] doubleValue];
+        runNumber = [[decoder decodeObject] unsignedIntegerValue];
+
+        trackSegments = [decoder decodeObject];
+        
+        // Totally not sure about these
+        envVals = [[decoder decodeObject] boolValue];
+        execname = [[decoder decodeObject] boolValue];
+        terminateTaskAtStop = [[decoder decodeObject] boolValue];
         pid = [decoder decodeObject][@"_pid"];
         launchControlProperties = [[decoder decodeObject] boolValue];
-		args = [[decoder decodeObject] boolValue];
-	}
-	
-	return self;
+        args = [[decoder decodeObject] boolValue];
+    }
+    return self;
 }
 
 - (void)dealloc
@@ -49,10 +47,10 @@
 
 - (NSString *)formattedSample:(NSUInteger)index
 {
-	NSDictionary *data = sampleData[index];
+    NSDictionary *data = sampleData[index];
     NSMutableString *result = [NSMutableString string];
     double relativeTimestamp = [data[@"XRActivityClientTraceRelativeTimestamp"] doubleValue];
-	double seconds = relativeTimestamp / 1000.0 / 1000.0 / 1000.0;
+    double seconds = relativeTimestamp / 1000.0 / 1000.0 / 1000.0;
     NSTimeInterval timestamp = startTime + seconds;
     [result appendFormat:@"Process: %@ ", targetProcess];
     
@@ -68,40 +66,32 @@
             break;
         }
     }
-	[result appendFormat:@"Timestamp: %@ ", [dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:timestamp]]];
-	
-	return result;
+    [result appendFormat:@"Timestamp: %@ ", [dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:timestamp]]];
+    return result;
 }
 
 - (NSString *)description
 {
-	NSString *start = [dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:startTime]];
-	NSString *end = [dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:endTime]];
-	
-	NSMutableString *result = [NSMutableString stringWithFormat:@"Run %u, starting at %@, running until %@\n", (unsigned int)runNumber, start, end];
-	
-	for(NSUInteger i=0; i<[sampleData count]; i++)
-	{
-		[result appendFormat:@"Sample %u: %@\n", (unsigned int)i, [self formattedSample:i]];
-	}
-	
-	return result;
+    NSString *start = [dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:startTime]];
+    NSString *end = [dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:endTime]];
+    NSMutableString *result = [NSMutableString stringWithFormat:@"Run %u, starting at %@, running until %@\n", (unsigned int)runNumber, start, end];
+    for(NSUInteger i=0; i<[sampleData count]; i++)
+    {
+        [result appendFormat:@"Sample %u: %@\n", (unsigned int)i, [self formattedSample:i]];
+    }
+    return result;
 }
 
 
 
 - (id)initWithCoder:(NSCoder *)decoder
 {
-	if((self = [super initWithCoder:decoder]))
-	{
-		// retain?
-		sampleData = [decoder decodeObject];
-		
-		// One more object...
-		[decoder decodeObject];
-	}
-	
-	return self;
+    if((self = [super initWithCoder:decoder]))
+    {
+        sampleData = [decoder decodeObject];
+        [decoder decodeObject];
+    }
+    return self;
 }
 
 - (void)dealloc
