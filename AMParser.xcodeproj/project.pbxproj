@@ -12,6 +12,7 @@
 		0A14A3EB187F023E00B5A733 /* AMParser.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A14A3EA187F023E00B5A733 /* AMParser.1 */; };
 		0A14A3F3187F026400B5A733 /* XRRun.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A14A3F2187F026400B5A733 /* XRRun.m */; };
 		0A14A3F6187F038600B5A733 /* PFTTrackSegment.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A14A3F5187F038600B5A733 /* PFTTrackSegment.m */; };
+		0ABF15C818B6012A00ECF896 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ABF15C718B6012A00ECF896 /* Utils.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -37,6 +38,8 @@
 		0A14A3F2187F026400B5A733 /* XRRun.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XRRun.m; sourceTree = "<group>"; };
 		0A14A3F4187F038600B5A733 /* PFTTrackSegment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFTTrackSegment.h; sourceTree = "<group>"; };
 		0A14A3F5187F038600B5A733 /* PFTTrackSegment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFTTrackSegment.m; sourceTree = "<group>"; };
+		0ABF15C618B6012A00ECF896 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		0ABF15C718B6012A00ECF896 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +89,8 @@
 				0A14A3F2187F026400B5A733 /* XRRun.m */,
 				0A14A3F4187F038600B5A733 /* PFTTrackSegment.h */,
 				0A14A3F5187F038600B5A733 /* PFTTrackSegment.m */,
+				0ABF15C618B6012A00ECF896 /* Utils.h */,
+				0ABF15C718B6012A00ECF896 /* Utils.m */,
 			);
 			path = AMParser;
 			sourceTree = "<group>";
@@ -152,6 +157,7 @@
 				0A14A3F6187F038600B5A733 /* PFTTrackSegment.m in Sources */,
 				0A14A3E7187F023E00B5A733 /* main.m in Sources */,
 				0A14A3F3187F026400B5A733 /* XRRun.m in Sources */,
+				0ABF15C818B6012A00ECF896 /* Utils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,6 +271,7 @@
 				0A14A3F0187F023E00B5A733 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
